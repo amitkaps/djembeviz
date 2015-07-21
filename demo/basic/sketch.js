@@ -6,7 +6,7 @@ var amplitude;
 var mapMax = 4;
 
 function preload() {
-  song = loadSound('song/djembesolo.mp3');
+  song = loadSound('../../song/djembesolo.mp3');
 }
 
 function setup() {
