@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Learning Djembe Visuall with p5.js - Amit Kapoor</title>
+
+		<meta name="description" content="Learning Djembe Visually with p5.js">
+		<meta name="author" content="Amit Kapoor">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+
+		<!-- custom css -->
+		<style media="screen">
+
+		@font-face {
+				font-family: 'djemberegular';
+				src: url('../fonts/djembe45-webfont.eot');
+				src: url('../fonts/djembe45-webfont.eot?#iefix') format('embedded-opentype'),
+						 url('../fonts/djembe45-webfont.woff') format('woff'),
+						 url('../fonts/djembe45-webfont.ttf') format('truetype'),
+						 url('../fonts/djembe45-webfont.svg#djemberegular') format('svg');
+				font-weight: normal;
+				font-style: normal;
+			}
+
+			.notation .djembe {
+			  font-family: djemberegular, courier, monospace;
+			  font-size: 3rem;
+			  line-height: 0.5em;
+			}
+
+			.icon {
+				width: 12rem;
+				height: 12rem;
+			}
+
+			.img-opacity .slide-background.present {
+    		opacity: 0.3;
+			}
+
+			.large-icon .icon {
+				width: 20rem;
+				height: 20rem;
+			}
+
+			.no-bullet ul {
+				list-style-type: none;
+			}
+
+			.no-bullet ul li {
+				line-height: 4rem;
+			}
+
+			.no-bullet pre {
+				font-size: 2.5rem;
+				line-height: 0.5em;
+			}
+
+			.pre-align pre {
+				text-align: center;;
+				font-size: 2.5rem;
+				line-height: 1em;
+				box-shadow: none;
+			}
+
+			.large-quote blockquote{
+				font-size: 2.5rem;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section data-background="../img/djembe-hand.jpg" data-state="img-opacity">
+					<object type="image/svg+xml" data="../img/djembe-white.svg" class="icon">djembe</object>
+					<h1>Learning Djembe Visually </h1>
+					<h2>with p5.js</h2>
+					<p>
+						<a href="http://amitkaps.com" target="_blank">Amit Kapoor</a> &amp;
+						<a href="http://jembeashok.com" target="_blank">Ashok Kumar</a>
+					</p>
+				</section>
+
+				<section data-background-iframe="/viz/random/">
+				</section>
+
+				<section>
+					<h2>How do you learn the djembe?</h2>
+				</section>
+
+				<section data-state="large-icon"  data-background="#556636">
+					<h1> Play the Djembe</h1>
+					<object type="image/svg+xml" data="../img/djembe-white.svg" class="icon">djembe</object>
+				</section>
+
+				<section data-state="no-bullet" data-background="#324855">
+					<h1> Say the Rhythm </h1>
+					<h3> <ul>
+						<li>Boom - Pa - Boom Pa</li>
+						<li>Boom - Pa - Boom Pa</li>
+						<li>Boom - Pa - Boom Pa</li>
+						<li>Boom - Boom - Pa </li>
+					</ul> </h3>
+				</section>
+
+				<section data-state="pre-align" data-background="#40484A">
+					<h1> Count the Notes</h1>
+					<h3>
+						<pre>1  2  3  4  5  6  7  8</pre>
+						<pre>b  -  t  -  b  t  -  -</pre>
+						<pre>b  -  t  -  b  t  -  -</pre>
+						<pre>b  -  t  -  b  t  -  -</pre>
+						<pre>b  -  b  -  t  -  -  -</pre>
+					</h3>
+				</section>
+
+				<section data-state="notation" data-background="#332524">
+					<h1> Show the Notes</h1>
+					<div class="djembe">
+						<p> &nbsp;12345678 </p>
+						<p> Qb-s-bs-- </p>
+						<p> Qb-s-bs-- </p>
+						<p> Qb-s-bs-- </p>
+						<p> Qb-b-s--- </p>
+					</div>
+				</section>
+
+				<section data-state="large-quote">
+					<h1>Learning Styles</h1>
+					<blockquote>
+						&ldquo;Anything that is worth teaching can be presented in many different ways.&rdquo;
+						- Howard Gardner
+				 </blockquote>
+				</section>
+
+				<section data-background="../img/learning_style_pics.png">
+				</section>
+
+				<section data-background="../img/learning_style.png">
+				</section>
+
+				<section>
+					<h1>Bridge the Gap</h1>
+					<h2> Music - Code - Visuals</h2>
+				</section>
+
+				<section>
+					<h1>What does Sound look like?</h1>
+					<small>Source - <a href="http://www.npr.org/2014/04/09/300563606/what-does-sound-look-like">NPR Video</a></small>
+				</section>
+
+				<section data-background="/img/compressionwave.gif">
+				</section>
+
+				<section>
+					<h1>Creative Coding</h1>
+					<h2><a href="http://processing.org">Processing</a></h2>
+					<h2><a href="http://processingjs.org/">Processing.js</a></h2>
+				</section>
+
+				<section data-state="large-icon">
+					<a href="httP://p5js.org">
+						<object type="image/svg+xml" data="../img/p5js-beta.svg" class="icon">p5.js</object>
+					</a>
+					<h3> Make coding accesible for artists, designer, educators and beginners for modern web</h3>
+				</section>
+
+
+				<section data-background-iframe="/viz/hello/">
+					<h2>Simple Code</h2>
+					<pre><code data-trim contenteditable>
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+	frameRate(5);
+	background(17,17,17,40);
+	fill(231,173,82);
+	x = random(width);
+	y = random(height);
+	ellipse(x, y, 100, 100);
+}
+			</code></pre>
+		</section>
+
+
+				<section data-background-iframe="/viz/volume/">
+					<h2> Volume </h2>
+					<h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2>
+				</section>
+
+
+				<section data-background-iframe="/viz/time/">
+					<h2> Volume across Time </h2>
+					<h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2>
+				</section>
+
+				<section>
+					<h2>Clever Quotes</h2>
+				</section>
+
+				<section>
+					<h2>Take a Moment</h2>
+				</section>
+
+				<section data-background="../img/djembe-drum.jpg" data-state="img-opacity">
+					<h1>Thank You</h1>
+					<p>
+						<a href="http://amitkaps.com" target="_blank">amitkaps.com</a> <br>
+						<a href="https://jembeashok.com" target="_blank">jembeashok.com</a>
+					</p>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'none', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
