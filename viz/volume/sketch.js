@@ -6,11 +6,11 @@ var song;
 var amplitude;
 var mapMax = 0.8;
 
-/*
+
 function preload() {
-  song = loadSound('../../song/djembesolo.mp3');
+  song = loadSound('../../song/djembesample.mp3');
 }
-*/
+
 
 function setup() {
   // Create a black canvas for the entire window

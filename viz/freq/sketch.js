@@ -1,56 +1,54 @@
-// Visualise the time domain using a waveform
+// Visualise the frequency domain using FFT
 
 var mic
 var song;
 var analyzer;
 
-// Array of amplitude values (-1 to +1) over time.
+// Array of amplitude values (-1 to +1) over Frequency.
 var samples = [];
 var currentSource = "mic";
 
 
 function preload() {
-  song = loadSound('../../song/djembesample.mp3');
+  song = loadSound('../../song/teach.mp3');
 }
 
 
 function setup() {
   // Create a black canvas for the entire window
   createCanvas(windowWidth, windowHeight);
-  background(17,17,17);
-  noFill();
-  stroke('#E7AD52');
+  colorMode(HSB, 360, 100, 100, 1)
+  background(0,0,0);
 
   // Start the microphone and use for input
   mic = new p5.AudioIn();
   mic.start();
 
-  // Start the FFT analyzer for the song
-  analyzer = new p5.FFT();
+  // Start the FFT analyzer for the song, default 1024 bin
+  analyzer = new p5.FFT(0.8, 256);
   analyzer.setInput(mic);
 }
 
 function draw() {
-
   // Repaint the canvas as black
-  background('#111111');
-  noFill();
-  stroke('#E7AD52');
+  background(0,0,0);
+  noStroke();
   // text('press t to toggle source', 20, height - 60);
 
-  // get a buffer of 1024 samples over time.
-  samples = analyzer.waveform();
+  // get a buffer of 1024 samples over Frequency.
+  samples = analyzer.analyze();
   var bins = samples.length;
+  binwidth = width / bins
 
   // draw snapshot of the samples
-  strokeWeight(3);
-  beginShape();
   for (var i = 0; i < bins; i++){
     var x = map(i, 0, bins, 0, width);
-    var y = map(samples[i], -1, 1, -height*7/8/2, height*7/8/2);
-    vertex(x, y + height/2);
+    var l = map(samples[i], 0, 255, 0, height);
+    var y = height - l;
+    var c = color(round(map(i, 0, bins, 0, 360)), 100, 100);
+    fill(c);
+    rect(x, y, binwidth, l);
   }
-  endShape();
 
 }
 

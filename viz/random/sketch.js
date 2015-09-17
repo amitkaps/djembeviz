@@ -7,17 +7,17 @@ var amplitude;
 // for red, green, and blue color values
 var r, g, b;
 
-/*
+
 function preload() {
-  song = loadSound('../../song/djembesolo.mp3');
+  song = loadSound('../../song/djembesample.mp3');
 }
-*/
+
 
 function setup() {
   // Create a black canvas for the entire window
   createCanvas(windowWidth, windowHeight);
   background(17,17,17);
-  fill('#f3d7ac');
+  fill('#E7AD52');
   noStroke();
 
   // Start the microphone and use for input
