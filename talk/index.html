@@ -113,7 +113,8 @@
 					</p>
 				</section>
 
-				<section data-background-iframe="/viz/random/">
+				<section data-background=rgba(17,17,17,0.5)>
+					<iframe class="stretch" data-src="/viz/random/"></iframe>
 				</section>
 
 				<section>
@@ -177,29 +178,20 @@
 				</section>
 
 				<section>
-					<h1>What does Sound look like?</h1>
-					<small>Source - <a href="http://www.npr.org/2014/04/09/300563606/what-does-sound-look-like">NPR Video</a></small>
-				</section>
-
-				<section data-background="/img/compressionwave.gif">
-				</section>
-
-				<section>
 					<h1>Creative Coding</h1>
-					<h2><a href="http://processing.org">Processing</a></h2>
-					<h2><a href="http://processingjs.org/">Processing.js</a></h2>
+					<h2><a href="http://processing.org" target="_blank">Processing</a></h2>
+					<h2><a href="http://processingjs.org/" target="_blank">Processing.js</a></h2>
 				</section>
 
 				<section data-state="large-icon">
-					<a href="httP://p5js.org">
-						<object type="image/svg+xml" data="../img/p5js-beta.svg" class="icon">p5.js</object>
-					</a>
-					<h3> Make coding accesible for artists, designer, educators and beginners for modern web</h3>
+					<!-- <object type="image/svg+xml" data="../img/p5js-beta.svg" class="icon">p5.js</object>  -->
+					<h1> <a href="http://p5js.org" target="_blank">p5.js</a></h1>
+					<h3> Make coding for the modern web accesible to artists, designer, educators and beginners</h3>
 				</section>
 
 
 				<section data-background-iframe="/viz/hello/">
-					<h2>Simple Code</h2>
+					<h2>Easy to Code*</h2>
 					<pre><code data-trim contenteditable>
 function setup() {
 	createCanvas(windowWidth, windowHeight);
@@ -209,32 +201,86 @@ function draw() {
 	frameRate(5);
 	background(17,17,17,40);
 	fill(231,173,82);
+	noStroke();
 	x = random(width);
 	y = random(height);
 	ellipse(x, y, 100, 100);
 }
 			</code></pre>
+			<small>* once you know a little bit about HTML, CSS, JS, ...</small>
 		</section>
 
+				<section>
+					<h1>What does Sound look like?</h1>
+					<small>Source - <a href="http://www.npr.org/2014/04/09/300563606/what-does-sound-look-like">NPR Video</a></small>
+				</section>
 
-				<section data-background-iframe="/viz/volume/">
+				<section data-background="/img/sound_clap.gif">
+				</section>
+
+				<section>
+					<h1> <a href="http://p5js.org/reference/#/libraries/p5.sound">p5.sound </a></h1>
+					<h3> Extends p5.js with Web Audio API </h3>
+				</section>
+
+				<section>
+					<h2> Start with </h2>
+					<h1> <a href="http://p5js.org/reference/#/p5.Amplitude" target="_blank">
+						volume</a></h1>
+				</section>
+
+				<section>
 					<h2> Volume </h2>
-					<h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2>
-				</section>
-
-
-				<section data-background-iframe="/viz/time/">
-					<h2> Volume across Time </h2>
-					<h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2> <h2> &nbsp; </h2>
+					<iframe class="stretch" data-src="/viz/volume/"></iframe>
 				</section>
 
 				<section>
-					<h2>Clever Quotes</h2>
+					<h2> Move to volume</h2>
+					<h1> <a href="http://p5js.org/reference/#/p5.FFT" target="_blank">
+						across time</a></h1>
 				</section>
 
 				<section>
-					<h2>Take a Moment</h2>
+					<h2> <a href="http://p5js.org/reference/#/p5.FFT" target="_blank">
+						Fast Fourier Transform (FFT)</a></h2>
+					<h3>Sample a very small snapshot of sound (buffer) and returns volume measurement in bins (say, 1024)</h3>
 				</section>
+
+				<section>
+					<h2> Across Time </h2>
+					<iframe class="stretch" data-src="/viz/time/"></iframe>
+				</section>
+
+
+				<section>
+					<h2>More to come at...</h2>
+					<a href="http://amitkaps.com/djembeviz">
+						<img src="../img/website.png" alt="Visualising Djembe Website" />
+					</a>
+					<h3> <a href="https://amitkaps/djembviz" target="_blank">amitkaps.com/djembeviz</a> </h3>
+				</section>
+
+				<section>
+					<h2> Learn more at...</h2>
+					<br>
+					<h3> <a href="https://github.com/therewasaguy/p5-music-viz" target="_blank">Music Viz Workshop with p5.js</a> </h3>
+					<h4> By Jason Sigal</h4>
+					<br>
+					<h3> <a href="https://github.com/shiffman/The-Nature-of-Code-Examples-p5.js" target="_blank">The Nature of Code</a> </h3>
+					<h4> By Daniel Shiffman <h4>
+				</section>
+
+				<section data-state="large-quote">
+					<object type="image/svg+xml" data="../img/djembe-white.svg" class="icon">djembe</object>
+					<blockquote>
+						&ldquo;I hear and I forget. <br>
+						I see and I remember. <br>
+						I do and I understand.&rdquo; <br>
+						- Confucius
+  				</blockquote>
+				</section>
+
+
 
 				<section data-background="../img/djembe-drum.jpg" data-state="img-opacity">
 					<h1>Thank You</h1>
@@ -260,6 +306,8 @@ function draw() {
 				progress: true,
 				history: true,
 				center: true,
+				// Number of slides away from the current that are visible
+	 			viewDistance: 3,
 
 				transition: 'none', // none/fade/slide/convex/concave/zoom
 

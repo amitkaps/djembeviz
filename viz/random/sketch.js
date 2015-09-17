@@ -7,16 +7,16 @@ var amplitude;
 // for red, green, and blue color values
 var r, g, b;
 
-
+/*
 function preload() {
   song = loadSound('../../song/djembesolo.mp3');
 }
-
+*/
 
 function setup() {
   // Create a black canvas for the entire window
   createCanvas(windowWidth, windowHeight);
-  background(17,17,17,0.8);
+  background(17,17,17);
   fill('#f3d7ac');
   noStroke();
 
@@ -42,7 +42,7 @@ function draw() {
     b = random(255);
     fill(r,g,b,127);
     // For color variant - comment out the below
-    fill('#E7AD52');
+    // fill('#E7AD52');
     noStroke();
     // text('press t to toggle source', 20, height - 60);
 
@@ -60,6 +60,10 @@ function draw() {
 
 }
 
+// resize canvas on windowResized
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
 
 // toggle input

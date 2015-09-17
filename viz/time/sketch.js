@@ -8,18 +8,18 @@ var analyzer;
 var samples = [];
 var currentSource = "mic";
 
-
+/*
 function preload() {
   song = loadSound('../../song/djembesolo.mp3');
 }
-
+*/
 
 function setup() {
   // Create a black canvas for the entire window
   createCanvas(windowWidth, windowHeight);
-  background('#111111');
+  background(17,17,17);
   noFill();
-  stroke('#f3d7ac');
+  stroke('#E7AD52');
 
   // Start the microphone and use for input
   mic = new p5.AudioIn();
@@ -47,13 +47,17 @@ function draw() {
   beginShape();
   for (var i = 0; i < bufLen; i++){
     var x = map(i, 0, bufLen, 0, width);
-    var y = map(samples[i], -1, 1, -height/2, height/2);
+    var y = map(samples[i], -1, 1, -height*7/8/2, height*7/8/2);
     vertex(x, y + height/2);
   }
   endShape();
 
 }
 
+// resize canvas on windowResized
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
 
 // toggle input
 function keyPressed() {
