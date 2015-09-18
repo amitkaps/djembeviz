@@ -1,14 +1,14 @@
 // Preload a Song and get its amplitude
-// Visualise using an ellipse jumping
+// Visualise using an ellipse jumping between min and max lines
 
 var mic;
 var song;
 var amplitude;
-var mapMax = 0.8;
+var mapMax = 1;
 
 
 function preload() {
-  song = loadSound('../../song/djembesample.mp3');
+  song = loadSound('../../song/teach.mp3');
 }
 
 
@@ -37,8 +37,10 @@ function draw() {
 
     // text('press t to toggle source', 20, height - 60);
 
-    // Get the level of the Amplitude
+    // Get the level of the volume
     var level = amplitude.getLevel();
+    // text('volume: ' + level, 20, height - 60);
+
 
     // var size = map(level, 0, 1, 0, 1200);
     // ellipse(width/2, height/2, size, size);
@@ -51,9 +53,12 @@ function draw() {
 
     noStroke();
 
-    // map ellipse height to the amplitude
-    var ellipseHeight = map(level, 0, mapMax, height*7/8, height*1/8);
-    ellipse(width/2, ellipseHeight, 100, 100);
+    // map ellipse height to the volume - normal scale
+    // var ellipseHeight = map(level, 0, mapMax, height*7/8, height*1/8);
+
+    // map ellipse height to the volume level - log scale
+    var ellipseHeight = map(-Math.log2(level + 0.01), -Math.log2(0.01), -Math.log2(mapMax), height*7/8, height*1/8);
+    ellipse(width/2, ellipseHeight, 75, 75);
 }
 
 // resize canvas on windowResized

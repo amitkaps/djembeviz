@@ -3,7 +3,7 @@
 
 var mic;
 var song;
-var amplitude;
+var volume;
 // for red, green, and blue color values
 var r, g, b;
 
@@ -25,8 +25,8 @@ function setup() {
   mic.start();
 
   // Get the amplitude (volume) of the song
-  amplitude = new p5.Amplitude();
-  amplitude.setInput(mic);
+  volume = new p5.Amplitude();
+  volume.setInput(mic);
 }
 
 function draw() {
@@ -77,10 +77,10 @@ function toggleInput() {
   if (song.isPlaying() ) {
     song.pause();
     mic.start();
-    amplitude.setInput(mic);
+    volume.setInput(mic);
   } else {
     song.play();
     mic.stop();
-    amplitude.setInput(song);
+    volume.setInput(song);
   }
 }

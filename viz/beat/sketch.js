@@ -1,129 +1,108 @@
-/**
- *  This technique tracks a beatThreshold level.
- *
- *  When the current volume exceeds the beatThreshold, we have a beat, and
- *  "debounce" to ensure each beat only triggers once.
- *
- *  When a beat is detected, we do two things to "debounce":
- *   - Increase the threshold, so that we don't get another
- *     beat right away, by adding a beatCutoff to the beatThreshold.
- *     The beatCutoff decays back to beatThreshold level at beatDecayRate.
- *   - Wait a certain amount of time before detecting another beat. This is
- *     accomplished by tracking framesSinceLastBeat > beatHoldFrames.
- *
- *  Each run through the Draw loop, the detectBeat() function decides
- *  whether we have a beat or not based on these Beat Detect Variables
- *  and the current amplitude level.
- *
- *  Thank you to Felix Turner's "Simple Beat Detection"
- *  http://www.airtightinteractive.com/2013/10/making-audio-reactive-visuals/
- */
+// Preload a Song and get its volume (amplitude)
+// Use the amplitute to develop the beat algorithm
+// Decide at what threshold level is there a beat and then select it
+// Uses cutoff and decay values to prevent a beat being picked immediately
 
-var soundFile;
-var amplitude;
+var mic;
+var song;
+var volume;
+var mapMax = 1;
 
-var backgroundColor;
-
-// rectangle parameters
-var rectRotate = true;
-var rectMin = 15;
-var rectOffset = 20;
-var numRects = 10;
-
-// :: Beat Detect Variables
-// how many draw loop frames before the beatCutoff starts to decay
-// so that another beat can be triggered.
-// frameRate() is usually around 60 frames per second,
-// so 20 fps = 3 beats per second, meaning if the song is over 180 BPM,
-// we wont respond to every beat.
-var beatHoldFrames = 30;
-
-// what amplitude level can trigger a beat?
-var beatThreshold = 0.11;
-
-// When we have a beat, beatCutoff will be reset to 1.1*beatThreshold, and then decay
-// Level must be greater than beatThreshold and beatCutoff before the next beat can trigger.
-var beatCutoff = 0;
-var beatDecayRate = 0.98; // how fast does beat cutoff decay?
-var framesSinceLastBeat = 0; // once this equals beatHoldFrames, beatCutoff starts to decay.
-
+// For beat calculation
+var threshold = 0.08;
+var cutoff = 0;
+var decayRate = 0.90;
+var beat;
+var size;
 
 function preload() {
-  soundFile = loadSound('../../song/djembesolo.mp3');
+  song = loadSound('../../song/teach.mp3');
 }
 
+
 function setup() {
-  c = createCanvas(windowWidth, windowHeight);
+  // Create a black canvas for the entire window
+  createCanvas(windowWidth, windowHeight);
+  background(17,17,17);
+  fill('#f3d7ac');
   noStroke();
-  rectMode(CENTER);
 
-  amplitude = new p5.Amplitude();
+  // Start the microphone and use for input
+  mic = new p5.AudioIn();
+  mic.start();
 
-  soundFile.play();
+  // Get the amplitude (volume) of the song
+  volume = new p5.Amplitude();
+  volume.setInput(mic);
 
-  amplitude.setInput(soundFile);
-  amplitude.smooth(0.9);
 }
 
 function draw() {
 
-  var level = amplitude.getLevel();
-  detectBeat(level);
+    // Repaint the canvas as black
+    background(17,17,17);
+    fill('#E7AD52');
 
-  background(backgroundColor);
+    // text('press t to toggle source', 20, height - 60);
 
-  // distort the rectangle based based on the amp
-  var distortDiam = map(level, 0, 1, 0, 1200);
-  var w = rectMin;
-  var h = rectMin;
+    // Get the level of the Amplitude
+    var level = volume.getLevel();
+    // text('volume: ' + level, 20, height - 60);
 
-  // distortion direction shifts each beat
-  if (rectRotate) {
-    var rotation = PI/ 2;
-  } else {
-    var rotation = PI/ 3;
-  }
 
-  // rotate the drawing coordinates to rectCenter position
-  var rectCenter = createVector(width/3, height/2);
-
-  push();
-
-    // draw the rectangles
-    for (var i = 0; i < numRects; i++) {
-      var x = rectCenter.x + rectOffset * i;
-      var y = rectCenter.y + distortDiam/2;
-      // rotate around the center of this rectangle
-      translate(x, y);
-      rotate(rotation);
-      rect(0, 0, rectMin, rectMin + distortDiam);
+    // If the volume > threshold + cutoff, then we have a beat
+    if (level > threshold + cutoff) {
+      beat = 1;
+      size = 100;
+      fill(255,0,0);
+      // Increase the cutoff
+      cutoff = 0.05;
+    } else {
+      beat = 0;
+      size = 25;
     }
-  pop();
+
+    // Start decaying the cutoff
+    cutoff = cutoff * decayRate;
+
+    //console.log (threshold + cutoff, level);
+
+    // Draw the max and min lines
+    strokeWeight(1);
+    stroke('#E7AD52');
+    line(width*2/8, height*7/8, width*6/8, height*7/8);
+    line(width*2/8, height*1/8, width*6/8, height*1/8);
+
+    noStroke();
+
+    // map ellipse height to the volume level - log scale
+    var ellipseHeight = map(-Math.log2(level + 0.01), -Math.log2(0.01), -Math.log2(mapMax), height*7/8, height*1/8);
+    ellipse(width/2, ellipseHeight, size, size);
+    // console.log(ellipseHeight);
+
 }
 
-function detectBeat(level) {
-  if (level  > beatCutoff && level > beatThreshold){
-    onBeat();
-    beatCutoff = level *1.2;
-    framesSinceLastBeat = 0;
-  } else{
-    if (framesSinceLastBeat <= beatHoldFrames){
-      framesSinceLastBeat ++;
-    }
-    else{
-      beatCutoff *= beatDecayRate;
-      beatCutoff = Math.max(beatCutoff, beatThreshold);
-    }
-  }
-}
-
-function onBeat() {
-  backgroundColor = color( random(0,255), random(0,255), random(0,255) );
-  console.log(backgroundColor);
-  rectRotate = !rectRotate;
-}
-
+// resize canvas on windowResized
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  background(0);
+}
+
+
+// toggle input
+function keyPressed() {
+  if (key == 'T') {
+    toggleInput();
+  }
+}
+
+function toggleInput() {
+  if (song.isPlaying() ) {
+    song.pause();
+    mic.start();
+    volume.setInput(mic);
+  } else {
+    song.play();
+    mic.stop();
+    volume.setInput(song);
+  }
 }

@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
 		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/monokai_sublime.css">
 
 
 		<!-- Printing and PDF exports -->
@@ -47,6 +47,12 @@
 				font-weight: normal;
 				font-style: normal;
 			}
+
+			.reveal pre code {
+			  background: #222222;
+				color: #FFFFFF;
+			}
+
 
 			.notation .djembe {
 			  font-family: djemberegular, courier, monospace;
@@ -235,6 +241,21 @@ function draw() {
 				</section>
 
 				<section>
+					<h2> Can you feel the beat?</h2>
+				</section>
+
+				<section>
+					<h1> <a href="http://archive.gamedev.net/archive/reference/programming/features/beatdetection/" target="_blank">
+						Beat</a></h1>
+					<h2> "A brutal variation in sound energy"</h2>
+				</section>
+
+				<section>
+					<h2> Beat - Peak Detection </h2>
+					<iframe class="stretch" data-src="/viz/beat/"></iframe>
+				</section>
+
+				<section>
 					<h2> <a href="http://p5js.org/reference/#/p5.FFT" target="_blank">
 						Fast Fourier Transform (FFT)</a></h2>
 					<h3>Sample a very small snapshot of sound (buffer) and returns measurement in bins (say, 1024)</h3>
@@ -274,11 +295,10 @@ function draw() {
 				</section>
 
 				<section>
-					<h2>More to come at...</h2>
 					<a href="http://amitkaps.com/djembeviz">
 						<img src="../img/website.png" alt="Visualising Djembe Website" />
 					</a>
-					<h3> <a href="https://amitkaps/djembviz" target="_blank">amitkaps.com/djembeviz</a> </h3>
+					<h3> <a href="https://djembeviz.amitkaps/" target="_blank">djembeviz.amitkaps.com</a> </h3>
 				</section>
 
 				<section>
@@ -304,11 +324,11 @@ function draw() {
 
 
 				<section data-background="../img/djembe-drum.jpg" data-state="img-opacity">
-					<h1>Thank You</h1>
-					<p>
+					<h1>Play your Rhythm</h1>
+					<h3>
 						<a href="http://amitkaps.com" target="_blank">amitkaps.com</a> <br>
 						<a href="https://jembeashok.com" target="_blank">jembeashok.com</a>
-					</p>
+					</h3>
 				</section>
 
 			</div>
