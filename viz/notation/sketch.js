@@ -97,6 +97,11 @@ function draw() {
     text('Bass Adder: ' + bassAdd, width*13/16, height*7/8 - 270);
 
     fill('#E7AD52');
+    textSize(24);
+    text('Tone', width*1/16, height*3.8/8);
+    text('Bass', width*1/16, height*4.4/8);
+    textSize(12);
+
     // Get the level of the Amplitude
     var level = rhythmvolume.getLevel();
     // text('volume: ' + level, 20, height - 60);
