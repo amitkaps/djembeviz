@@ -13,25 +13,30 @@ var mapMax = 1;
 var threshold = 0.06;
 var cutoffAdd = 0.20;
 var decayRate = 0.85;
+var bassAdd = 0.07;
 
 var cutoff = 0;
 var beat;
 var size;
+var bass;
 
 // To start and stop finding beats
 var beatFind = 1;
 var beatHold = 10;
 var beatFrame = 0;
 
+
 // Declare slider variables
 var thresholdSlider;
 var cutoffAddSlider;
 var decayRateSlider;
 var beatHoldSlider;
+var bassAddSlider;
 
 // Create an array to store amplitude over time & size
 var prevLevels = new Array(80);
 var prevBeat = new Array(80);
+var prevBass = new Array(80)
 
 function preload() {
   song = loadSound('../../song/teach.mp3');
@@ -54,6 +59,9 @@ function setup() {
   decayRateSlider.position(width*13/16, height*7/8 - 140);
   beatHoldSlider = createSlider(0, 120, beatHold);
   beatHoldSlider.position(width*13/16, height*7/8 - 200);
+  bassAddSlider = createSlider(0, 30, bassAdd * 100);
+  bassAddSlider.position(width*13/16, height*7/8 - 260);
+
 
   // Start the microphone and use for input
   mic = new p5.AudioIn();
@@ -78,13 +86,15 @@ function draw() {
     cutoffAdd = cutoffAddSlider.value() / 100;
     decayRate = decayRateSlider.value() / 100;
     beatHold = beatHoldSlider.value();
+    bassAdd = bassAddSlider.value() / 100;
 
     // Create Slider Text
     fill(200)
-    text('Threshold: ' + threshold, width*13/16, height*7/8 - 30);
+    text('Threshold: ' + nf(threshold,1,2), width*13/16, height*7/8 - 30);
     text('Cutoff Adder: ' + cutoffAdd, width*13/16, height*7/8 - 90);
     text('Decay Rate: ' + decayRate, width*13/16, height*7/8 - 150);
     text('Beats Hold: ' + beatHold, width*13/16, height*7/8 - 210);
+    text('Bass Adder: ' + bassAdd, width*13/16, height*7/8 - 270);
 
     fill('#E7AD52');
     // Get the level of the Amplitude
@@ -95,6 +105,12 @@ function draw() {
     if ((level > threshold + cutoff) && (beatFind === 1)) {
       beat = 1;
       size = 100;
+
+      if (level < threshold + bassAdd) {
+        bass = 1;
+      } else {
+        bass = 0;
+      }
 
       // Reset the beatFrame count
       beatFrame = 0;
@@ -126,22 +142,27 @@ function draw() {
     // Draw the max and min lines
     strokeWeight(3);
     stroke(231,173,82);
-    line(width*1/16, height*7/8, width*6/8, height*7/8);
-    line(width*1/16, height*1/8, width*6/8, height*1/8);
+    // line(width*1/16, height*7/8, width*6/8, height*7/8);
+    // line(width*1/16, height*1/8, width*6/8, height*1/8);
+    line(width*1/16, height*4/8, width*6/8, height*4/8);
 
+    /*
     stroke(231,173,82, 126);
     var thresh = map(-Math.log2(threshold + cutoff + 0.01), -Math.log2(0.01), -Math.log2(mapMax), height*7/8, height*1/8);
-    line(width*1/16, thresh, width*6/8, thresh);
+    line(width*2/8, thresh, width*6/8, thresh);
+    */
 
     noStroke();
 
     // add new level to end of array
     prevLevels.push(level);
     prevBeat.push(beat);
+    prevBass.push(bass);
 
     // remove first item in array
     prevLevels.splice(0, 1);
     prevBeat.splice(0, 1);
+    prevBass.splice(0, 1);
 
     // rectangle variables - padding(p) and width(w)
     var p = 5;
@@ -155,14 +176,24 @@ function draw() {
 
       // map y to the volume level - log scale
       var y = map(-Math.log2(prevLevels[i] + 0.01), -Math.log2(0.01), -Math.log2(mapMax), height*7/8, height*1/8);
-      // ellipse(x, y, prevSizes[i], prevSizes[i]);
 
-      fill(231, 173, 82, 200);
+      fill(17,17,17);
       if(prevBeat[i] === 1) {
-        fill(255,0,0);
+
+        fill(231, 173, 82, 255);
+        if (prevBass[i] === 1) {
+          // fill(0, 255, 0, 200);
+          rect(x - w - p/2, height*4/8, 15, height * 1/8);
+          ellipse(x - w - p/2, height*5/8, 75, 75)
+        } else {
+          // fill(0, 0, 255, 200)
+          rect(x - w - p/2, height*3/8, 15, height * 1/8);
+          ellipse(x - w - p/2, height*3/8, 75, 75)
+        }
+        // Draw the ellipse above or below the middle line
+        // rect(x - w - p/2, y, w, height * 7/8 - y);
       }
-      // Draw the rectangles starting for the last edge
-      rect(x - w - p/2, y, w, height * 7/8 - y);
+
     }
 
 }
