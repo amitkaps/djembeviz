@@ -90,7 +90,7 @@ function draw() {
 
     // Create Slider Text
     fill(200)
-    text('Threshold: ' + nf(threshold,1,2), width*13/16, height*7/8 - 30);
+    text('Threshold: ' + threshold, width*13/16, height*7/8 - 30);
     text('Cutoff Adder: ' + cutoffAdd, width*13/16, height*7/8 - 90);
     text('Decay Rate: ' + decayRate, width*13/16, height*7/8 - 150);
     text('Beats Hold: ' + beatHold, width*13/16, height*7/8 - 210);
