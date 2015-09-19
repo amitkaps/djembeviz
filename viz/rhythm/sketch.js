@@ -20,7 +20,7 @@ var size;
 
 // To start and stop finding beats
 var beatFind = 1;
-var beatHold = 10;
+var beatHold = 20;
 var beatFrame = 0;
 
 // Declare slider variables

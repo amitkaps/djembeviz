@@ -11,9 +11,9 @@ var mapMax = 1;
 
 // For beat calculation
 var threshold = 0.06;
-var cutoffAdd = 0.20;
+var cutoffAdd = 0.50;
 var decayRate = 0.85;
-var bassAdd = 0.07;
+var bassAdd = 0.20;
 
 var cutoff = 0;
 var beat;
@@ -22,7 +22,7 @@ var bass;
 
 // To start and stop finding beats
 var beatFind = 1;
-var beatHold = 10;
+var beatHold = 5;
 var beatFrame = 0;
 
 
@@ -98,8 +98,8 @@ function draw() {
 
     fill('#E7AD52');
     textSize(24);
-    text('Tone', width*1/16, height*3.8/8);
-    text('Bass', width*1/16, height*4.4/8);
+    //text('Tone', width*1/16, height*3.8/8);
+    //text('Bass', width*1/16, height*4.4/8);
     textSize(12);
 
     // Get the level of the Amplitude
