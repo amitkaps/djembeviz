@@ -46,7 +46,7 @@ function draw() {
     // ellipse(width/2, height/2, size, size);
 
     // Draw the max and min lines
-    strokeWeight(1);
+    strokeWeight(3);
     stroke('#E7AD52');
     line(width*2/8, height*7/8, width*6/8, height*7/8);
     line(width*2/8, height*1/8, width*6/8, height*1/8);

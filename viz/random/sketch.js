@@ -3,7 +3,7 @@
 
 var mic;
 var song;
-var volume;
+var volumerand;
 // for red, green, and blue color values
 var r, g, b;
 
@@ -25,8 +25,8 @@ function setup() {
   mic.start();
 
   // Get the amplitude (volume) of the song
-  volume = new p5.Amplitude();
-  volume.setInput(mic);
+  volumerand = new p5.Amplitude();
+  volumerand.setInput(mic);
 }
 
 function draw() {
@@ -40,14 +40,14 @@ function draw() {
     r = random(255);
     g = random(255);
     b = random(255);
-    fill(r,g,b,127);
+    fill(r,g,b,200);
     // For color variant - comment out the below
     // fill('#E7AD52');
     noStroke();
     // text('press t to toggle source', 20, height - 60);
 
     // Get the level of the Amplitude
-    var level = amplitude.getLevel();
+    var level = volumerand.getLevel();
 
     var x = random(width);
     var y = random(height);
@@ -77,10 +77,10 @@ function toggleInput() {
   if (song.isPlaying() ) {
     song.pause();
     mic.start();
-    volume.setInput(mic);
+    volumerand.setInput(mic);
   } else {
     song.play();
     mic.stop();
-    volume.setInput(song);
+    volumerand.setInput(song);
   }
 }
