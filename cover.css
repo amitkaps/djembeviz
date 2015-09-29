@@ -104,6 +104,12 @@ hr {
   top: -1px;
 }
 
+.container {
+  max-width: 35rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
 .container img, .container iframe {
   max-width: 100%;
 }
@@ -111,17 +117,6 @@ hr {
 .container img {
   margin: 0 auto;
   display: block;
-}
-
-.container img {
-  margin: 0 auto;
-  display: block;
-}
-
-.container {
-  max-width: 35rem;
-  margin: 0 auto;
-  padding: 0 1rem;
 }
 
 .vid-container {
