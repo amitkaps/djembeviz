@@ -22,7 +22,7 @@ var beatHold = 10;
 var beatFrame = 0;
 
 function preload() {
-  song = loadSound('../../song/teach.mp3');
+  song = loadSound('../../song/djembesample.mp3');
 }
 
 

@@ -8,7 +8,7 @@ var mapMax = 1;
 
 
 function preload() {
-  song = loadSound('../../song/teach.mp3');
+  song = loadSound('../../song/djembesample.mp3');
 }
 
 

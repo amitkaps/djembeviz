@@ -34,7 +34,7 @@ var prevLevels = new Array(80);
 var prevBeat = new Array(80);
 
 function preload() {
-  song = loadSound('../../song/teach.mp3');
+  song = loadSound('../../song/djembesample.mp3');
 }
 
 

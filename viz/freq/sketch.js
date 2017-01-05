@@ -10,7 +10,7 @@ var currentSource = "mic";
 
 
 function preload() {
-  song = loadSound('../../song/teach.mp3');
+  song = loadSound('../../song/bass_tone_slap.mp3');
 }
 
 

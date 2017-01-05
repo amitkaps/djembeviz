@@ -27,8 +27,8 @@ function setup() {
   background(0,0,0);
 
   // create sliders
-  bassSlider = createSlider(0, 50, bassBand);
-  bassSlider.position(width*6/8, height*1/8);
+  //bassSlider = createSlider(0, 50, bassBand);
+  //bassSlider.position(width*6/8, height*1/8);
 
   // Start the microphone and use for input
   mic = new p5.AudioIn();
@@ -37,22 +37,27 @@ function setup() {
   // Start the FFT analyzer for the song, default 1024 bin
   analyzer = new p5.FFT(0.8, 1024);
   analyzer.setInput(mic);
+  peak = new p5.PeakDetect();
+
 }
 
 function draw() {
   // Repaint the canvas as black
   background(0,0,0);
-  fill(37,61,90);
+  //fill(37,61,90);
   noStroke();
   // text('press t to toggle source', 20, height - 60);
 
   // Set the Slidervalues
-  bassBand = bassSlider.value();
+  //bassBand = bassSlider.value();
+  bassBand = 10;
 
   // get a buffer of 1024 samples over Frequency.
   samples = analyzer.analyze();
   var bins = samples.length;
-  binwidth = width / bins
+  console.log(bins);
+  binwidth = width / bins;
+
 
   // Find out the max band
   maxBand = -1;
@@ -70,43 +75,39 @@ function draw() {
     bass = 0;
   }
 
-  // Paint the background rect
-  var wide = map(Math.log2(bassBand+2), 0, Math.log2(bins+2), 0, width);
-  // fill(60,100,50);
-  // rect(0,0,wide,height);
-  // fill(4,19,20);
-  // rect(wide,0,width - wide,height);
-  // fill(37,61,90);
 
   // Create Slider Text
-  fill(200)
-  text('Bass Band Select: ' + bassBand, width*6/8, height*1/8 - 10);
+  //fill(200)
+  //text('Bass Band Select: ' + bassBand, width*6/8, height*1/8 - 10);
 
-  // draw snapshot of the samples on a log scale
-  var o = 1;
-  var xcum = 0;
-  for (var i = 0; i < bins; i++){
-    var x = map(Math.log2(i+2), 0, Math.log2(bins+2), 0, width);
-    var l = map(samples[i], 0, 255, 0, height);
-    var y = height - l;
-    var c = color(round(map(i, 0, bins, 0, 360)), 100, 100, 0.5);
-    // fill(c);
-    //fill(37, 61, 90, 0.5);
-    if (bass === 1) {
-      if (i <= bassBand) {
-        c = color(round(map(i, 0, bins, 0, 360)), 100, 100, 1);
-      }
-    } else {
-      if (i > bassBand){
-        c = color(round(map(i, 0, bins, 0, 360)), 100, 100, 1);
-      }
-    }
-    fill(c);
-    rect(xcum, y, x - xcum, l);
-    xcum = x;
-  }
+  drawSample(20, bassBand, bass);
 
 }
+
+function drawSample(bins, bassBand, bass){
+  var xcum = 0;
+  for (var i = 0; i < bins; i++){
+    //var x = map(Math.log2(i+2), 0, Math.log2(bins+2), 0, width);
+    var x = map(i, 0, bins, 0, width);
+    var l = map(samples[i], 0, 255, 0, height);
+    var y = height - l;
+    var c = color(round(map(i, 0, bins, 0, 360)), 100, 100, 0.05);
+    if (bass === 1) {
+        if (i <= bassBand) {
+          c = color(round(map(i, 0, bins, 0, 360)), 100, 100, 0.8);
+        }
+      } else {
+        if (i > bassBand){
+          c = color(round(map(i, 0, bins, 0, 360)), 100, 100, 0.8);
+        }
+      }
+    fill(c);
+    ellipse(xcum, height/2, l/3, l/3);
+    //rect(xcum, y, x - xcum, l);
+    xcum = x;
+  }
+}
+
 
 // resize canvas on windowResized
 function windowResized() {
